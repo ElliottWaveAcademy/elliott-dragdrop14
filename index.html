@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Elliott Wave Drag & Drop</title>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #f4f4f4;
+  }
+
+  h2 {
+    margin-bottom: 20px;
+  }
+
+  #chart {
+    position: relative;
+    width: 800px;
+    margin: auto;
+  }
+
+  #chart img {
+    width: 100%;
+  }
+
+  /* ================= LABELS ================= */
+  .label {
+    position: absolute;
+    background: #222;
+    color: #fff;
+    border-radius: 4px;
+    cursor: grab;
+    user-select: none;
+    text-align: center;
+  }
+
+  .label.large {
+    font-size: 22px;
+    padding: 10px 16px;
+  }
+
+  .label.medium {
+    font-size: 18px;
+    padding: 8px 14px;
+  }
+
+  .label.small {
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+
+  /* ================= DROPZONES ================= */
+  .dropzone {
+    position: absolute;
+    border: 2px dashed #999;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    background: rgba(255,255,255,0.8);
+  }
+
+  .dropzone.large {
+    width: 90px;
+    height: 45px;
+    font-size: 22px;
+  }
+
+  .dropzone.medium {
+    width: 75px;
+    height: 38px;
+    font-size: 18px;
+  }
+
+  .dropzone.small {
+    width: 60px;
+    height: 30px;
+    font-size: 14px;
+  }
+</style>
+</head>
+
+<body>
+
+<h2>Move the waves to the correct position</h2>
+
+<div id="chart">
+  <img src="https://github.com/ElliottWaveAcademy/elliott-dragdrop13/blob/main/%C3%9Cberschrift%20hinzuf%C3%BCgen%20-%202025-12-31T141101.045.png?raw=true">
+
+  <!-- DROPZONES (small = 1–5, medium = a–c) -->
+  <div class="dropzone small"  style="top:220px; left:220px;"></div>
+  <div class="dropzone small"  style="top:350px; left:250px;"></div>
+  <div class="dropzone small"  style="top:120px; left:370px;"></div>
+  <div class="dropzone small"  style="top:250px; left:400px;"></div>
+  <div class="dropzone small"  style="top:45px;  left:480px;"></div>
+
+  <div class="dropzone medium" style="top:190px; left:520px;"></div>
+  <div class="dropzone medium" style="top:85px;  left:570px;"></div>
+  <div class="dropzone medium" style="top:230px; left:620px;"></div>
+
+  <!-- LABELS: (1)–(5) -->
+  <div class="label medium" style="top:10px; left:10px;" draggable="true">(1)</div>
+  <div class="label medium" style="top:40px; left:10px;" draggable="true">(2)</div>
+  <div class="label medium" style="top:70px; left:10px;" draggable="true">(3)</div>
+  <div class="label medium" style="top:100px; left:10px;" draggable="true">(4)</div>
+  <div class="label medium" style="top:130px; left:10px;" draggable="true">(5)</div>
+
+  <!-- LABELS: (a)–(c) -->
+  <div class="label medium" style="top:170px; left:10px;" draggable="true">(a)</div>
+  <div class="label medium" style="top:200px; left:10px;" draggable="true">(b)</div>
+  <div class="label medium" style="top:230px; left:10px;" draggable="true">(c)</div>
+
+  <!-- LABELS: 1–5 -->
+  <div class="label small" style="top:10px; left:90px;" draggable="true">1</div>
+  <div class="label small" style="top:40px; left:90px;" draggable="true">2</div>
+  <div class="label small" style="top:70px; left:90px;" draggable="true">3</div>
+  <div class="label small" style="top:100px; left:90px;" draggable="true">4</div>
+  <div class="label small" style="top:130px; left:90px;" draggable="true">5</div>
+
+  <!-- LABELS: a–c -->
+  <div class="label small" style="top:240px; left:90px;" draggable="true">a</div>
+  <div class="label small" style="top:270px; left:90px;" draggable="true">b</div>
+  <div class="label small" style="top:300px; left:90px;" draggable="true">c</div>
+
+  <!-- LABELS: I – II (largest degree) -->
+  <div class="label large" style="top:170px; left:170px;" draggable="true">I</div>
+  <div class="label large" style="top:220px; left:170px;" draggable="true">II</div>
+
+</div>
+
+<script>
+const labels = document.querySelectorAll('.label');
+const zones = document.querySelectorAll('.dropzone');
+
+const correct = ['1','2','3','4','5','a','b','c'];
+
+labels.forEach(label => {
+  label.addEventListener('dragstart', e => {
+    e.dataTransfer.setData('text', e.target.innerHTML);
+  });
+});
+
+zones.forEach((zone, i) => {
+  zone.addEventListener('dragover', e => e.preventDefault());
+  zone.addEventListener('drop', e => {
+    e.preventDefault();
+    const dropped = e.dataTransfer.getData('text');
+    zone.innerHTML = dropped;
+
+    zone.style.border =
+      dropped === correct[i] ? '2px solid green' : '2px solid red';
+  });
+});
+</script>
+
+</body>
+</html>
