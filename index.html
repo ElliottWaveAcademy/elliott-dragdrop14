@@ -7,33 +7,50 @@
 <style>
   body {
     font-family: Arial, sans-serif;
-    text-align: center;
     background: #f4f4f4;
+    margin: 0;
   }
 
   h2 {
+    text-align: center;
+    margin: 20px 0;
+  }
+
+  .container {
+    display: flex;
+    max-width: 1200px;
+    margin: auto;
+    padding: 10px;
+  }
+
+  /* ================= SIDEBAR ================= */
+  .sidebar {
+    width: 220px;
+    background: #ffffff;
+    border-right: 2px solid #ddd;
+    padding: 15px;
+  }
+
+  .group {
     margin-bottom: 20px;
   }
 
-  #chart {
-    position: relative;
-    width: 800px;
-    margin: auto;
+  .group-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #444;
   }
 
-  #chart img {
-    width: 100%;
-  }
-
-  /* ================= LABELS ================= */
   .label {
-    position: absolute;
     background: #222;
     color: #fff;
     border-radius: 4px;
     cursor: grab;
     user-select: none;
     text-align: center;
+    margin-bottom: 6px;
+    width: fit-content;
   }
 
   .label.large {
@@ -51,22 +68,34 @@
     padding: 6px 10px;
   }
 
-  /* ================= DROPZONES ================= */
+  /* ================= CHART ================= */
+  .chart {
+    position: relative;
+    width: 800px;
+    margin-left: 20px;
+  }
+
+  .chart img {
+    width: 100%;
+    display: block;
+  }
+
   .dropzone {
     position: absolute;
     border: 2px dashed #999;
     border-radius: 4px;
+    background: rgba(255,255,255,0.85);
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    background: rgba(255,255,255,0.8);
+    color: #333;
   }
 
-  .dropzone.large {
-    width: 90px;
-    height: 45px;
-    font-size: 22px;
+  .dropzone.small {
+    width: 60px;
+    height: 30px;
+    font-size: 14px;
   }
 
   .dropzone.medium {
@@ -75,10 +104,10 @@
     font-size: 18px;
   }
 
-  .dropzone.small {
-    width: 60px;
-    height: 30px;
-    font-size: 14px;
+  .dropzone.large {
+    width: 90px;
+    height: 45px;
+    font-size: 22px;
   }
 </style>
 </head>
@@ -87,47 +116,58 @@
 
 <h2>Move the waves to the correct position</h2>
 
-<div id="chart">
-  <img src="https://github.com/ElliottWaveAcademy/elliott-dragdrop13/blob/main/%C3%9Cberschrift%20hinzuf%C3%BCgen%20-%202025-12-31T141101.045.png?raw=true">
+<div class="container">
 
-  <!-- DROPZONES (small = 1–5, medium = a–c) -->
-  <div class="dropzone small"  style="top:220px; left:220px;"></div>
-  <div class="dropzone small"  style="top:350px; left:250px;"></div>
-  <div class="dropzone small"  style="top:120px; left:370px;"></div>
-  <div class="dropzone small"  style="top:250px; left:400px;"></div>
-  <div class="dropzone small"  style="top:45px;  left:480px;"></div>
+  <!-- ================= SIDEBAR ================= -->
+  <div class="sidebar">
 
-  <div class="dropzone medium" style="top:190px; left:520px;"></div>
-  <div class="dropzone medium" style="top:85px;  left:570px;"></div>
-  <div class="dropzone medium" style="top:230px; left:620px;"></div>
+    <div class="group">
+      <div class="group-title">Largest Degree</div>
+      <div class="label large" draggable="true">I</div>
+      <div class="label large" draggable="true">II</div>
+    </div>
 
-  <!-- LABELS: (1)–(5) -->
-  <div class="label medium" style="top:10px; left:10px;" draggable="true">(1)</div>
-  <div class="label medium" style="top:40px; left:10px;" draggable="true">(2)</div>
-  <div class="label medium" style="top:70px; left:10px;" draggable="true">(3)</div>
-  <div class="label medium" style="top:100px; left:10px;" draggable="true">(4)</div>
-  <div class="label medium" style="top:130px; left:10px;" draggable="true">(5)</div>
+    <div class="group">
+      <div class="group-title">Medium Degree</div>
+      <div class="label medium" draggable="true">(1)</div>
+      <div class="label medium" draggable="true">(2)</div>
+      <div class="label medium" draggable="true">(3)</div>
+      <div class="label medium" draggable="true">(4)</div>
+      <div class="label medium" draggable="true">(5)</div>
+      <div class="label medium" draggable="true">(a)</div>
+      <div class="label medium" draggable="true">(b)</div>
+      <div class="label medium" draggable="true">(c)</div>
+    </div>
 
-  <!-- LABELS: (a)–(c) -->
-  <div class="label medium" style="top:170px; left:10px;" draggable="true">(a)</div>
-  <div class="label medium" style="top:200px; left:10px;" draggable="true">(b)</div>
-  <div class="label medium" style="top:230px; left:10px;" draggable="true">(c)</div>
+    <div class="group">
+      <div class="group-title">Small Degree</div>
+      <div class="label small" draggable="true">1</div>
+      <div class="label small" draggable="true">2</div>
+      <div class="label small" draggable="true">3</div>
+      <div class="label small" draggable="true">4</div>
+      <div class="label small" draggable="true">5</div>
+      <div class="label small" draggable="true">a</div>
+      <div class="label small" draggable="true">b</div>
+      <div class="label small" draggable="true">c</div>
+    </div>
 
-  <!-- LABELS: 1–5 -->
-  <div class="label small" style="top:10px; left:90px;" draggable="true">1</div>
-  <div class="label small" style="top:40px; left:90px;" draggable="true">2</div>
-  <div class="label small" style="top:70px; left:90px;" draggable="true">3</div>
-  <div class="label small" style="top:100px; left:90px;" draggable="true">4</div>
-  <div class="label small" style="top:130px; left:90px;" draggable="true">5</div>
+  </div>
 
-  <!-- LABELS: a–c -->
-  <div class="label small" style="top:240px; left:90px;" draggable="true">a</div>
-  <div class="label small" style="top:270px; left:90px;" draggable="true">b</div>
-  <div class="label small" style="top:300px; left:90px;" draggable="true">c</div>
+  <!-- ================= CHART ================= -->
+  <div class="chart">
+    <img src="https://github.com/ElliottWaveAcademy/elliott-dragdrop13/blob/main/%C3%9Cberschrift%20hinzuf%C3%BCgen%20-%202025-12-31T141101.045.png?raw=true">
 
-  <!-- LABELS: I – II (largest degree) -->
-  <div class="label large" style="top:170px; left:170px;" draggable="true">I</div>
-  <div class="label large" style="top:220px; left:170px;" draggable="true">II</div>
+    <!-- Dropzones -->
+    <div class="dropzone small"  style="top:220px; left:220px;"></div>
+    <div class="dropzone small"  style="top:350px; left:250px;"></div>
+    <div class="dropzone small"  style="top:120px; left:370px;"></div>
+    <div class="dropzone small"  style="top:250px; left:400px;"></div>
+    <div class="dropzone small"  style="top:45px;  left:480px;"></div>
+
+    <div class="dropzone medium" style="top:190px; left:520px;"></div>
+    <div class="dropzone medium" style="top:85px;  left:570px;"></div>
+    <div class="dropzone medium" style="top:230px; left:620px;"></div>
+  </div>
 
 </div>
 
@@ -139,19 +179,21 @@ const correct = ['1','2','3','4','5','a','b','c'];
 
 labels.forEach(label => {
   label.addEventListener('dragstart', e => {
-    e.dataTransfer.setData('text', e.target.innerHTML);
+    e.dataTransfer.setData('text', e.target.innerText);
   });
 });
 
-zones.forEach((zone, i) => {
+zones.forEach((zone, index) => {
   zone.addEventListener('dragover', e => e.preventDefault());
   zone.addEventListener('drop', e => {
     e.preventDefault();
     const dropped = e.dataTransfer.getData('text');
-    zone.innerHTML = dropped;
+    zone.innerText = dropped;
 
     zone.style.border =
-      dropped === correct[i] ? '2px solid green' : '2px solid red';
+      dropped === correct[index]
+        ? '2px solid green'
+        : '2px solid red';
   });
 });
 </script>
